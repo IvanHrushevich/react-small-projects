@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import type { Task, Column as ColumnType } from './types';
 import { Column } from './Column';
+import { type DragEndEvent, DndContext } from '@dnd-kit/core';
 
 const COLUMNS: ColumnType[] = [
     { id: 'TODO', title: 'To Do' },
@@ -38,20 +39,41 @@ const INITIAL_TASKS: Task[] = [
 const KanbanBoard = () => {
     const [tasks, setTasks] = useState<Task[]>(INITIAL_TASKS);
 
+    function handleDragEnd(event: DragEndEvent) {
+        const { active, over } = event;
+
+        if (!over) return;
+
+        const taskId = active.id as string;
+        const newStatus = over.id as Task['status'];
+        const updatedTasks = tasks.map((task) =>
+            task.id === taskId
+                ? {
+                      ...task,
+                      status: newStatus,
+                  }
+                : task,
+        );
+
+        setTasks(updatedTasks);
+    }
+
     return (
         <div className="bg-neutral-900 p-4">
             <div className="flex gap-8">
-                {COLUMNS.map((column) => {
-                    return (
-                        <Column
-                            key={column.id}
-                            column={column}
-                            tasks={tasks.filter(
-                                (task) => task.status === column.id,
-                            )}
-                        />
-                    );
-                })}
+                <DndContext onDragEnd={handleDragEnd}>
+                    {COLUMNS.map((column) => {
+                        return (
+                            <Column
+                                key={column.id}
+                                column={column}
+                                tasks={tasks.filter(
+                                    (task) => task.status === column.id,
+                                )}
+                            />
+                        );
+                    })}
+                </DndContext>
             </div>
         </div>
     );
