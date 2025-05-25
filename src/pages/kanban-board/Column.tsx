@@ -1,3 +1,4 @@
+import { TaskCard } from './TaskCard';
 import type { Column as ColumnType, Task } from './types';
 
 type ColumnProps = {
@@ -14,7 +15,7 @@ export function Column({ column, tasks }: ColumnProps) {
 
             <div className="flex flex-1 flex-col gap-4">
                 {tasks.map((task) => {
-                    return <div className="text-neutral-300">{task.title}</div>;
+                    return <TaskCard key={task.id} task={task} />;
                 })}
             </div>
         </div>
