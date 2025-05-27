@@ -8,13 +8,7 @@ export const Navbar = () => {
                     to="/"
                     className="text-white px-4 py-2 rounded hover:bg-blue-700 transition-colors"
                 >
-                    Главная
-                </Link>
-                <Link
-                    to="/kanban-board"
-                    className="text-white px-4 py-2 rounded hover:bg-blue-700 transition-colors"
-                >
-                    Kanban Board
+                    Project list
                 </Link>
             </div>
         </nav>

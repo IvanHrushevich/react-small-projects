@@ -1,14 +1,16 @@
+import { Link } from 'react-router';
+
 export const Main = () => {
     return (
-        <div className="min-h-screen flex flex-col items-center justify-center">
-            <h1 className="text-4xl font-extrabold text-center">
-                <span className="relative inline-block">
-                    <span className="block absolute -inset-1 bg-pink-500 rotate-2 rounded-lg"></span>
-                    <span className="relative text-white px-4 py-2">
-                        Small React.js projects
-                    </span>
-                </span>
-            </h1>
+        <div className="p-6">
+            <nav className="flex flex-col space-y-3 w-64">
+                <Link
+                    to="/kanban-board"
+                    className="px-4 py-3 text-gray-700 bg-blue-50  hover:bg-blue-100 hover:text-blue-600 rounded transition-colors"
+                >
+                    Kanban Board
+                </Link>
+            </nav>
         </div>
     );
 };
