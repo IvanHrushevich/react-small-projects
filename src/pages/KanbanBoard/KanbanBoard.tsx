@@ -36,7 +36,7 @@ const INITIAL_TASKS: Task[] = [
     },
 ];
 
-const KanbanBoard = () => {
+export const KanbanBoard = () => {
     const [tasks, setTasks] = useState<Task[]>(INITIAL_TASKS);
 
     function handleDragEnd(event: DragEndEvent) {
@@ -78,5 +78,3 @@ const KanbanBoard = () => {
         </div>
     );
 };
-
-export default KanbanBoard;

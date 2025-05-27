@@ -1,7 +1,7 @@
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router';
-import KanbanBoard from '../pages/kanban-board/KanbanBoard';
 import { Navbar } from './Navbar';
 import { Main } from '../pages/Main/Main';
+import { ROUTES } from './routes';
 
 function App() {
     return (
@@ -9,7 +9,13 @@ function App() {
             <Navbar />
             <Routes>
                 <Route path="/" element={<Main />} />
-                <Route path="/kanban-board" element={<KanbanBoard />} />
+                {ROUTES.map((route) => (
+                    <Route
+                        key={route.path}
+                        path={route.path}
+                        element={<route.component />}
+                    />
+                ))}
                 <Route path="*" element={<Navigate to="/" replace />} />
             </Routes>
         </BrowserRouter>
